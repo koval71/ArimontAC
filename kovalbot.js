@@ -43,6 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('chatbot-input').addEventListener('keydown', function(e) {
         if (e.key === 'Enter') sendChatbotMessage();
     });
+    
+    // Ensure chatbot starts collapsed on all devices
+    const chatbotBody = document.getElementById('chatbot-body');
+    const chatbotHeader = document.getElementById('chatbot-header');
+    if (chatbotBody && chatbotHeader) {
+        chatbotBody.style.display = 'none';
+        chatbotHeader.style.borderRadius = '10px';
+    }
 });
 window.sendChatbotMessage = sendChatbotMessage;
 window.toggleChatbot = toggleChatbot;
@@ -51,7 +59,10 @@ function toggleChatbot() {
     const chatbotBody = document.getElementById('chatbot-body');
     const chatbotHeader = document.getElementById('chatbot-header');
     
-    if (chatbotBody.style.display === 'none') {
+    // Use getComputedStyle to get the actual display value
+    const isHidden = window.getComputedStyle(chatbotBody).display === 'none';
+    
+    if (isHidden) {
         chatbotBody.style.display = 'block';
         chatbotHeader.style.borderRadius = '10px 10px 0 0';
     } else {
