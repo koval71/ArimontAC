@@ -88,7 +88,13 @@ function renderItems() {
     
     card.innerHTML = `
       <div class="item-title">${item.name}</div>
-      <div class="item-meta">Quantity: <b>${item.qty}</b></div>
+      <div class="item-meta">
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="decrementItemQty(${idx})">-</button>
+          <span class="qty-display">Quantity: <b>${item.qty}</b></span>
+          <button class="qty-btn" onclick="incrementItemQty(${idx})">+</button>
+        </div>
+      </div>
       <div class="item-date">Last updated: ${formattedDate}</div>
       <button class="remove-btn" onclick="removeItem(${idx})">Remove</button>
     `;
@@ -135,8 +141,10 @@ document.getElementById('itemForm').onsubmit = function(e) {
   document.getElementById('itemName').focus();
 };
 
-// Expose removeItem globally
+// Expose functions globally
 window.removeItem = removeItem;
+window.incrementItemQty = incrementItemQty;
+window.decrementItemQty = decrementItemQty;
 
 // Load shared items when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -148,3 +156,103 @@ renderItems();
 
 // Auto-sync every 30 seconds to get updates from other devices
 setInterval(loadSharedItems, 30000);
+
+// Search functionality
+function initializeSearch() {
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  
+  if (!searchInput || !searchResults) return;
+  
+  searchInput.addEventListener('input', function(e) {
+    const query = e.target.value.trim().toLowerCase();
+    
+    if (query === '') {
+      searchResults.style.display = 'none';
+      return;
+    }
+    
+    const filteredItems = items.filter(item => 
+      item.name.toLowerCase().includes(query)
+    );
+    
+    if (filteredItems.length === 0) {
+      searchResults.innerHTML = '<div class="search-result-item" style="color: #888;">No items found</div>';
+      searchResults.style.display = 'block';
+      return;
+    }
+    
+    searchResults.innerHTML = filteredItems.map((item, index) => `
+      <div class="search-result-item" onclick="jumpToItem('${item.name}')">
+        <div class="search-result-name">${item.name}</div>
+        <div class="search-result-qty">Quantity: ${item.qty}</div>
+      </div>
+    `).join('');
+    
+    searchResults.style.display = 'block';
+  });
+  
+  // Hide search results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+}
+
+function jumpToItem(itemName) {
+  const searchResults = document.getElementById('searchResults');
+  const searchInput = document.getElementById('searchInput');
+  
+  // Hide search results
+  searchResults.style.display = 'none';
+  searchInput.value = '';
+  
+  // Find the item in the DOM and scroll to it
+  const inventoryList = document.getElementById('inventoryList');
+  const itemCards = inventoryList.querySelectorAll('.item-card');
+  
+  itemCards.forEach(card => {
+    const itemTitle = card.querySelector('.item-title');
+    if (itemTitle && itemTitle.textContent.toLowerCase() === itemName.toLowerCase()) {
+      // Scroll to the item
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Highlight the item
+      card.classList.add('search-highlight');
+      setTimeout(() => {
+        card.classList.remove('search-highlight');
+      }, 2000);
+    }
+  });
+}
+
+// Initialize search when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeSearch();
+});
+
+function incrementItemQty(idx) {
+  if (items[idx]) {
+    items[idx].qty += 1;
+    items[idx].dateAdded = new Date().toISOString(); // Update the date
+    saveItems();
+    renderItems();
+  }
+}
+
+function decrementItemQty(idx) {
+  if (items[idx]) {
+    if (items[idx].qty > 1) {
+      items[idx].qty -= 1;
+      items[idx].dateAdded = new Date().toISOString(); // Update the date
+      saveItems();
+      renderItems();
+    } else {
+      // If quantity would go to 0, ask if user wants to remove the item
+      if (confirm(`Remove ${items[idx].name} from inventory?`)) {
+        removeItem(idx);
+      }
+    }
+  }
+}
