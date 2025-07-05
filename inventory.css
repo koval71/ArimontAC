@@ -153,6 +153,11 @@ button:hover {
   font-size: 0.97em;
   color: #b76e79;
 }
+.item-date {
+  font-size: 0.85em;
+  color: #888;
+  margin-top: 4px;
+}
 .remove-btn {
   position: absolute;
   top: 12px;
