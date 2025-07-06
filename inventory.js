@@ -18,20 +18,7 @@ async function saveItems() {
       // Save to shared storage (you'll need to set up JSONBin account)
       // For now, we'll just simulate the call
       console.log('Attempting to save to shared storage...');
-      // Uncomment when you have your JSONBin setup:
-      /*
-      await fetch(STORAGE_URL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': '$2a$10$tfs4Is2YOrISBu/UL2yv9ubqcFjAZbOx5VHReca/8i6CvxA38mrz6'
-        },
-        body: JSON.stringify({
-          inventory: items,
-          lastUpdated: new Date().toISOString()
-        })
-      });
-      */
+      
       console.log('Saved to shared storage successfully');
     } catch (error) {
       console.error('Failed to save to shared storage:', error);
