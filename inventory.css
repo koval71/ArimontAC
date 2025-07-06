@@ -296,3 +296,35 @@ button:hover {
   font-size: 0.97em;
   color: #b76e79;
 }
+
+/* Gray effect for items with 0 quantity */
+.item-card-empty {
+  opacity: 0.5;
+  background: rgba(200, 200, 200, 0.3) !important;
+  border-left-color: #ccc !important;
+}
+
+.item-card-empty .item-title {
+  color: #888 !important;
+}
+
+.item-card-empty .qty-display {
+  color: #888 !important;
+}
+
+.item-card-empty .item-date {
+  color: #aaa !important;
+}
+
+/* Disabled decrement button when quantity is 0 */
+.qty-btn:disabled {
+  background: #f5f5f5 !important;
+  color: #ccc !important;
+  cursor: not-allowed !important;
+  border-color: #ddd !important;
+}
+
+.qty-btn:disabled:hover {
+  background: #f5f5f5 !important;
+  color: #ccc !important;
+}

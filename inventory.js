@@ -82,6 +82,11 @@ function renderItems() {
     const card = document.createElement('div');
     card.className = 'item-card';
     
+    // Add gray effect class if quantity is 0
+    if (item.qty === 0) {
+      card.classList.add('item-card-empty');
+    }
+    
     // Format the date as MM/DD/YY
     const date = new Date(item.dateAdded);
     const formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`;
@@ -90,7 +95,7 @@ function renderItems() {
       <div class="item-title">${item.name}</div>
       <div class="item-meta">
         <div class="qty-controls">
-          <button class="qty-btn" onclick="decrementItemQty(${idx})">-</button>
+          <button class="qty-btn" onclick="decrementItemQty(${idx})" ${item.qty === 0 ? 'disabled' : ''}>-</button>
           <span class="qty-display">Quantity: <b>${item.qty}</b></span>
           <button class="qty-btn" onclick="incrementItemQty(${idx})">+</button>
         </div>
@@ -243,16 +248,12 @@ function incrementItemQty(idx) {
 
 function decrementItemQty(idx) {
   if (items[idx]) {
-    if (items[idx].qty > 1) {
+    if (items[idx].qty > 0) {
       items[idx].qty -= 1;
       items[idx].dateAdded = new Date().toISOString(); // Update the date
       saveItems();
       renderItems();
-    } else {
-      // If quantity would go to 0, ask if user wants to remove the item
-      if (confirm(`Remove ${items[idx].name} from inventory?`)) {
-        removeItem(idx);
-      }
     }
+    // Allow quantity to go to 0, item stays in list with gray effect
   }
 }
