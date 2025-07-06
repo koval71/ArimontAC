@@ -3,7 +3,7 @@
 let items = JSON.parse(localStorage.getItem('homeInventory') || '[]');
 
 // Simple shared storage configuration
-const SHARED_STORAGE_ENABLED = true;
+const SHARED_STORAGE_ENABLED = true; // Set to true when JSONBin is ready
 const STORAGE_KEY = 'home-inventory-koval'; // Unique key for your family
 
 // Using a simple free service for shared storage
@@ -15,9 +15,19 @@ async function saveItems() {
   
   if (SHARED_STORAGE_ENABLED) {
     try {
-      // Save to shared storage (you'll need to set up JSONBin account)
-      // For now, we'll just simulate the call
       console.log('Attempting to save to shared storage...');
+      
+      await fetch(STORAGE_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': '$2a$10$tfs4Is2YOrISBu/UL2yv9ubqcFjAZbOx5VHReca/8i6CvxA38mrz6'
+        },
+        body: JSON.stringify({
+          inventory: items,
+          lastUpdated: new Date().toISOString()
+        })
+      });
       
       console.log('Saved to shared storage successfully');
     } catch (error) {
@@ -34,11 +44,10 @@ async function loadSharedItems() {
   
   try {
     console.log('Loading from shared storage...');
-    // Uncomment when you have your JSONBin setup:
-    /*
+    
     const response = await fetch(STORAGE_URL, {
       headers: {
-        'X-Master-Key': 'YOUR_API_KEY_HERE'
+        'X-Master-Key': '$2a$10$tfs4Is2YOrISBu/UL2yv9ubqcFjAZbOx5VHReca/8i6CvxA38mrz6'
       }
     });
     const data = await response.json();
@@ -49,7 +58,7 @@ async function loadSharedItems() {
       renderItems();
       console.log('Loaded from shared storage successfully');
     }
-    */
+    
   } catch (error) {
     console.error('Failed to load from shared storage:', error);
   }
@@ -100,6 +109,27 @@ function removeItem(idx) {
   renderItems();
 }
 
+function incrementItemQty(idx) {
+  if (items[idx]) {
+    items[idx].qty += 1;
+    items[idx].dateAdded = new Date().toISOString(); // Update the date
+    saveItems();
+    renderItems();
+  }
+}
+
+function decrementItemQty(idx) {
+  if (items[idx]) {
+    if (items[idx].qty > 0) {
+      items[idx].qty -= 1;
+      items[idx].dateAdded = new Date().toISOString(); // Update the date
+      saveItems();
+      renderItems();
+    }
+    // Allow quantity to go to 0, item stays in list with gray effect
+  }
+}
+
 // Quantity increment/decrement logic
 document.addEventListener('DOMContentLoaded', function() {
   const qtyInput = document.getElementById('itemQty');
@@ -110,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (parseInt(qtyInput.value) > 1) qtyInput.value = parseInt(qtyInput.value) - 1;
   };
 });
-
 
 const qtyInput = document.getElementById('itemQty');
 // Allow direct editing again
@@ -223,24 +252,3 @@ function jumpToItem(itemName) {
 document.addEventListener('DOMContentLoaded', function() {
   initializeSearch();
 });
-
-function incrementItemQty(idx) {
-  if (items[idx]) {
-    items[idx].qty += 1;
-    items[idx].dateAdded = new Date().toISOString(); // Update the date
-    saveItems();
-    renderItems();
-  }
-}
-
-function decrementItemQty(idx) {
-  if (items[idx]) {
-    if (items[idx].qty > 0) {
-      items[idx].qty -= 1;
-      items[idx].dateAdded = new Date().toISOString(); // Update the date
-      saveItems();
-      renderItems();
-    }
-    // Allow quantity to go to 0, item stays in list with gray effect
-  }
-}
