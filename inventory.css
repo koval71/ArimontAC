@@ -1,5 +1,5 @@
 body {
-  background-image: url("../Koval/background.png");
+  background-image: url("background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -328,6 +328,7 @@ button:hover {
   background: #f5f5f5 !important;
   color: #ccc !important;
 }
+
 /* Footer */
 .footer {
   background-color: #f8f9fa;
