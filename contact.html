@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arimont AC — Contacto</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Arimont AC</a>
+      <nav class="main-nav" id="main-nav" aria-label="Principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="services.html" class="nav-link">Servicios</a>
+        <a href="contact.html" class="nav-link cta">Contacto</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Alternar navegación" aria-controls="main-nav" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container contact-page">
+    <p class="kicker">Hablemos</p>
+    <h2 class="section-title">Contacto</h2>
+    <p style="color:var(--muted)">Llámanos: <a href="tel:+18001234567">+1 (800) 123-4567</a> · Correo: <a href="mailto:info@arimontac.com">info@arimontac.com</a></p>
+
+    <form class="contact-form" action="#" method="post" onsubmit="alert('Formulario enviado (demo)'); return false;" style="max-width:720px">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+        <label>Nombre
+          <input type="text" name="name" required>
+        </label>
+        <label>Teléfono
+          <input type="tel" name="phone">
+        </label>
+      </div>
+      <label>Correo
+        <input type="email" name="email" required>
+      </label>
+      <label>Mensaje
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button class="btn primary" type="submit">Enviar mensaje</button>
+    </form>
+
+    <div class="contact-social" style="margin-top:22px">
+      <h3 style="margin:0 0 8px">O contáctanos en</h3>
+      <p>
+        <a href="https://facebook.com/arimontac" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://instagram.com/arimontac" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/18001234567" aria-label="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container copyright">© <span id="year3"></span> Arimont AC</div>
+  </footer>
+
+  <script>document.getElementById('year3').textContent = new Date().getFullYear();</script>
+</body>
+</html>

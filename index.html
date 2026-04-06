@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arimont AC — Inicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Arimont AC</a>
+      <nav class="main-nav" id="main-nav" aria-label="Principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="services.html" class="nav-link">Servicios</a>
+        <a href="contact.html" class="nav-link cta">Contacto</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Alternar navegación" aria-controls="main-nav" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner container">
+        <div class="hero-content">
+          <p class="kicker">Servicios HVAC</p>
+          <h1 id="hero-title">Confort. Eficiencia. Confianza.</h1>
+          <p class="lead">Instalación · Reparación · Mantenimiento · Limpieza · Inspección</p>
+          <div class="hero-cta cta-panel">
+            <a class="btn primary" href="tel:+18001234567">Llamar +1 (800) 123-4567</a>
+            <a class="btn outline" href="contact.html">Solicitar cotización</a>
+          </div>
+
+          <!-- Imagen grande que sustituye las tres mini-cards -->
+          <div class="hero-media" aria-label="Imagen representativa de Arimont AC">
+            <img src="AC1.jpg" alt="Arimont AC - servicio HVAC" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-preview container" aria-label="Vista rápida de servicios">
+      <h2 class="section-title">Nuestros servicios</h2>
+      <div class="grid">
+        <a class="card" href="services.html#installation">
+          <img src="AC2.jpg" alt="Servicio de instalación" />
+          <h3>Instalación</h3>
+        </a>
+        <a class="card" href="services.html#repair">
+          <img src="AC3.jpg" alt="Servicio de reparación" />
+          <h3>Reparación</h3>
+        </a>
+        <a class="card" href="services.html#maintenance">
+          <img src="AC4.jpg" alt="Servicio de mantenimiento" />
+          <h3>Mantenimiento</h3>
+        </a>
+        <a class="card" href="services.html#cleaning">
+          <img src="AC5.jpg" alt="Limpieza e inspección" />
+          <h3>Limpieza e inspección</h3>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Arimont AC</h4>
+        <p>Servicios profesionales de HVAC — empresa local.</p>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <p><a href="tel:+18001234567">+1 (800) 123-4567</a></p>
+        <p><a href="mailto:info@arimontac.com">info@arimontac.com</a></p>
+      </div>
+
+      <div>
+        <h4>Síguenos</h4>
+        <p class="social">
+          <a href="https://facebook.com/arimontac" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://instagram.com/arimontac" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/18001234567" aria-label="WhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> Arimont AC</div>
+  </footer>
+
+  <script>
+    // control de menú móvil y año en pie de página
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('main-nav');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

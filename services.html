@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arimont AC — Servicios</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Arimont AC</a>
+      <nav class="main-nav" id="main-nav" aria-label="Principal">
+        <a href="index.html" class="nav-link">Inicio</a>
+        <a href="services.html" class="nav-link">Servicios</a>
+        <a href="contact.html" class="nav-link cta">Contacto</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Alternar navegación" aria-controls="main-nav" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="kicker">Qué hacemos</p>
+    <h2 class="section-title">Servicios</h2>
+
+    <div class="grid">
+      <article id="installation" class="card">
+        <img src="AC2.jpg" alt="Instalación de equipos" />
+        <h3>Instalación</h3>
+        <p style="padding:0 12px 16px; color:var(--muted)">Instalación completa de sistemas residenciales y comerciales. Selección y puesta en marcha para un rendimiento óptimo.</p>
+      </article>
+
+      <article id="repair" class="card">
+        <img src="AC3.jpg" alt="Reparación de equipos" />
+        <h3>Reparación</h3>
+        <p style="padding:0 12px 16px; color:var(--muted)">Diagnóstico y reparación de compresores, eléctricos y fugas de refrigerante con repuestos habituales en stock.</p>
+      </article>
+
+      <article id="maintenance" class="card">
+        <img src="AC4.jpg" alt="Mantenimiento preventivo" />
+        <h3>Mantenimiento</h3>
+        <p style="padding:0 12px 16px; color:var(--muted)">Planes de mantenimiento para reducir consumo y prolongar la vida del equipo. Incluye revisión y cambio de filtros.</p>
+      </article>
+
+      <article id="cleaning" class="card">
+        <img src="AC5.jpg" alt="Limpieza e inspección" />
+        <h3>Limpieza e inspección</h3>
+        <p style="padding:0 12px 16px; color:var(--muted)">Limpieza profunda de serpentines y líneas, más inspecciones de seguridad para prevenir fallos.</p>
+      </article>
+    </div>
+
+    <p style="margin-top:20px"><a class="btn primary" href="contact.html">Solicitar cotización</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Contacto</h4>
+        <p><a href="tel:+18001234567">+1 (800) 123-4567</a></p>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <p class="social">
+          <a href="https://facebook.com/arimontac" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+          <a href="https://instagram.com/arimontac" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        </p>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year2"></span> Arimont AC</div>
+  </footer>
+
+  <script>document.getElementById('year2').textContent = new Date().getFullYear();</script>
+</body>
+</html>
